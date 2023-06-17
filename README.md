@@ -25,6 +25,12 @@ Creación de cliente :https://dev-service-back.reto.pe/customer-management/custo
 KPI de Clientes:  https://dev-service-back.reto.pe/customer-management/customers/v1.0/kpiclientes ,
 Lista de Clientes https://dev-service-back.reto.pe/customer-management/customers/v1.0/listclientes ,
 
+Si se requiere consumir desde el apim sería de la siguiente forma el consumo:
+
+Creación de cliente :https://apim-ginr-dev-backend-001.azure-api.net/customer-management-api/customers/create ,
+KPI de Clientes: https://apim-ginr-dev-backend-001.azure-api.net/customer-management-api/customers/kpiclientes,
+Lista de Clientes: https://apim-ginr-dev-backend-001.azure-api.net/customer-management-api/customers/listclientes
+
 
 3) En archivo Diagrama Microservicios.drawio,el cual se ha exportado en imágenes se encuentra las dos propuestas de arquitectura utilizando el cloud azure y aws cloud. Se considera una capa de seguridad que cumpla función de WAF y a la vez una propuesta para poder consumir los microservicios desde un canal sería generar un token de acceso, aquí se ha incluido generarlo por los servicios que tienen de directorio activo tanto azure como aws. En el caso de Azure sería Azure Active Directory y en el caso de AWS sería AWS Directory Service.
 
