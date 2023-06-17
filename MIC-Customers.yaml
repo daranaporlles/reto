@@ -1,0 +1,613 @@
+openapi: 3.0.1
+info:
+  title: MIC - Customers
+  description: >-
+    Microservicio que expone funcionalidades de los Clientes
+  contact:
+    name: Arquitectura
+    email: arquitectura@gmail.com
+  license:
+    name: RETO
+  version: 1.0.0
+servers:
+  - url: http://dev-service-back.reto.pe
+    description: desarrollo
+  - url: http://stg-service-back.reto.pe
+    description: pruebas
+  - url: https://prd-service-back.reto.pe
+    description: produccion
+tags:
+  - name: Customer Management
+    description: Dominio de Negocio en formato BIAN.
+  - name: Customers
+    description: >-
+     Funcionalidades relacionadas al cliente
+paths:
+  /customer-management/customers/v1.0/kpiclientes/:
+    get:
+      security:
+      - bearerAuth: []
+      tags:
+      - "Customers"
+      summary: Servicio que obtiene el detalle de un cliente desde la BD
+      description: >-
+        # Descripcion de operacion
+
+        ## Objetivo
+
+        Capacidad que obtiene el promedio de edad entre todos los clientes y desviacion estándar entre todas las edades de los clientes.
+
+        ## Datos de entrada
+
+        En el path el identificador del cliente, en el query param parametros adicionales.
+
+        ## Datos de respuesta
+
+        Detalle del cliente.
+
+        ## Invoca al API en el Gateway
+
+        https://hostName/customer-management/v1.0/customers/kpiclientes
+        
+      operationId: kpiclientes
+      parameters:
+        - name: consumer-id
+          in: header
+          description: Datos del aplicativo o canal de origen.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            maxLength: 30
+          example: App-Movil
+        - name: country-id
+          in: header
+          description: Id del pais al que pertenece el servicio. Presente en response.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            maxLength: 04
+          example: PE
+        - name: destinationCountry-id
+          in: header
+          description: Id del pais destino.
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+            maxLength: 04
+          example: PE                            
+      responses:
+        '200':
+          description: Respuesta con los kpi de cliente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerDataResponse'
+          links:
+            API Gateway:
+              operationRef: https://hostName/account-management/v1.0/customers/kpiclientes/
+              description: Servicio que obtiene el promedio y desviacionEstandar entre todos los clientes
+        '400':
+          description: Se obtuvo error al validar firma de servicio.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        '401':
+          description: Credenciales invalidas.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        '404':
+          description: No se obtuvo el recurso solicitado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'                
+        '500':
+          description: Error inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+        '503':
+          description: Al obtener un timeout en el flujo del servicio.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_503' 
+
+  /customer-management/customers/v1.0/listclientes/:
+    get:
+      security:
+      - bearerAuth: []
+      tags:
+      - "Customers"
+      summary: Servicio que obtiene lista de clientes con todos los datos y fecha probable de muerte de cada una.
+      description: >-
+        # Descripcion de operacion
+
+        ## Objetivo
+
+        Capacidad que obtiene ista de clientes con todos los datos y fecha probable de muerte de cada una.
+
+        ## Datos de entrada
+
+        En el path el identificador del cliente, en el query param parametros adicionales.
+
+        ## Datos de respuesta
+
+        Detalle del cliente.
+
+        ## Invoca al API en el Gateway
+
+        https://hostName/customer-management/v1.0/customers/listclientes
+        
+      operationId: listclientes
+      parameters:
+        - name: consumer-id
+          in: header
+          description: Datos del aplicativo o canal de origen.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            maxLength: 30
+          example: App-Movil
+        - name: country-id
+          in: header
+          description: Id del pais al que pertenece el servicio. Presente en response.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            maxLength: 04
+          example: PE
+        - name: destinationCountry-id
+          in: header
+          description: Id del pais destino.
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+            maxLength: 04
+          example: PE                            
+      responses:
+        '200':
+          description: Respuesta con lista de clientes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerListResponse'
+          links:
+            API Gateway:
+              operationRef: https://hostName/account-management/v1.0/customers/kpiclientes/
+              description: Servicio que obtiene el promedio y desviacionEstandar entre todos los clientes
+        '400':
+          description: Se obtuvo error al validar firma de servicio.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        '401':
+          description: Credenciales invalidas.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        '404':
+          description: No se obtuvo el recurso solicitado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'                
+        '500':
+          description: Error inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+        '503':
+          description: Al obtener un timeout en el flujo del servicio.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_503' 
+                
+  /customer-management/customers/v1.0/create:
+    post:
+      security:
+      - bearerAuth: []
+      tags:
+      - "Customers"
+      summary: Servicio que crea un cliente en BD
+      description: >-
+        # Descripcion de operacion
+
+        ## Objetivo
+
+        Capacidad que crea un cliente en BD.
+
+        ## Datos de entrada
+
+        En el body del servicio.
+
+        ## Datos de respuesta
+
+        Detalle del cliente asociado a la creación.
+
+        ## Invoca al API en el Gateway
+
+        https://hostName/customer-management/v1.0/customers/create
+        
+      operationId: createCustomer
+      parameters:         
+        - name: consumer-id
+          in: header
+          description: Datos del aplicativo o canal de origen. Presente en response.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            maxLength: 30
+          example: App-Movil
+        - name: country-id
+          in: header
+          description: Id del pais al que pertenece el servicio.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            maxLength: 04
+          example: PE
+        - name: destinationCountry-id
+          in: header
+          description: Id del pais destino.
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+            maxLength: 04
+          example: PE
+
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createCustomerRequest'             
+      responses:
+        '200':
+          description: Respuesta de la creación de cliente en BD.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createCustomerResponse'
+          links:
+            API Gateway:
+              operationRef: https://hostName/customer-management/v1.0/customers/app-reto
+              description: Servicio que crea el cliente en BD.
+        '400':
+          description: Se obtuvo error al validar firma de servicio.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        '401':
+          description: Credenciales invalidas.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+        '404':
+          description: No se obtuvo el recurso solicitado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'                
+        '500':
+          description: Error inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+        '503':
+          description: Al obtener un timeout en el flujo del servicio.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_503'   
+                                
+components:
+  securitySchemes: 
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  # optional, for documentation purposes only  
+  schemas:
+    customerDataResponse:
+      allOf:
+        - $ref: '#/components/schemas/responseOK'
+        - $ref: '#/components/schemas/dataCustomerResponse'   
+        - $ref: '#/components/schemas/responseErrorDetail'
+    
+    customerListResponse:
+      allOf:
+        - $ref: '#/components/schemas/responseOK'
+        - $ref: '#/components/schemas/dataCustomerListResponse'   
+        - $ref: '#/components/schemas/responseErrorDetail'
+
+
+    createCustomerResponse:
+      allOf:
+        - $ref: '#/components/schemas/responseOK'
+        - $ref: '#/components/schemas/dataCreateCustomerResponse'   
+        - $ref: '#/components/schemas/responseErrorDetail'
+
+    responseOK:
+      type: object
+      properties:
+        succeeded:
+          type: boolean
+          description: Estado de respuesta.
+          example: TRUE
+          
+    responseErrorDetail:
+      properties:
+        errorDetail:
+          type: array
+          items:
+            $ref: '#/components/schemas/errorDetailOBJ'     
+          
+    errorDetailOBJ:
+      properties:
+        errorDetail:
+          type: object
+          properties:
+            timestamp:
+              type: string
+              format: datetime
+              description: Formato datetime.
+            code:
+              type: string
+              description: Código de respuesta.
+            message:
+              type: string
+              description: Estatus de respuesta.
+            details:
+              type: string
+              description: Estatus de respuesta.
+              
+    responseDataObj:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/responseErrorDataObj'
+            
+    responseErrorDataObj:
+      properties:
+        campo:
+          type: string
+          maxLength: 20
+          description: Campo Valor.
+
+
+    createCustomerRequest:
+      type: object
+      required: 
+        - nombre
+        - apellido
+      properties:
+        nombre:
+          type: string
+          description: nombre del cliente
+        apellido:
+          type: string
+          description: apellidos del cliente
+        edad:
+          type: number
+          description: Edad del cliente
+        fechanacimiento:
+          type: string
+          format: date
+          pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+          description: Fecha de nacimiento.
+              
+    dataCustomerResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/listDataCustomerResponse'
+    
+    dataCustomerListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/listDataCustomerDetailsResponse'
+
+
+    inline_response_400:
+      allOf:
+        - $ref: '#/components/schemas/responseOK'
+        - example:
+            succeeded: false
+        - $ref: '#/components/schemas/responseDataObj'
+        - example:
+            data: null                    
+        - $ref: '#/components/schemas/responseErrorDetail'
+        - example:
+            errorDetail: 
+                  - timestamp: 2022-07-11T19:15:37.011+00:00
+                    code: 1
+                    message: Se obtuvo un error caracteres incorrectos
+                    details:
+    inline_response_401:
+      allOf:
+        - $ref: '#/components/schemas/responseOK'
+        - example:
+            succeeded: false
+        - $ref: '#/components/schemas/responseDataObj'
+        - example:
+            data: null                      
+        - $ref: '#/components/schemas/responseErrorDetail'
+        - example:
+            errorDetail:
+                - timestamp: 2022-07-11T19:15:37.011+00:00
+                  code: 2
+                  message: Credenciales Invalidas
+                  details:
+    inline_response_404:
+      allOf:
+        - $ref: '#/components/schemas/responseOK'
+        - example:
+            succeeded: false
+        - $ref: '#/components/schemas/responseDataObj'
+        - example:
+            data: null            
+        - $ref: '#/components/schemas/responseErrorDetail'
+        - example:
+            errorDetail:
+                - timestamp: 2022-07-11T19:15:37.011+00:00
+                  code: 4
+                  message: No se obtuvo el recurso solicitado
+                  details: 
+    inline_response_500:
+      allOf:
+        - $ref: '#/components/schemas/responseOK'
+        - example:
+            succeeded: false
+        - $ref: '#/components/schemas/responseDataObj'
+        - example:
+            data: null            
+        - $ref: '#/components/schemas/responseErrorDetail'
+        - example:
+            errorDetail:
+                - timestamp: 2022-07-11T19:15:37.011+00:00
+                  code: -1
+                  message: Error inesperado en el procedimiento
+                  details:
+    inline_response_503:
+      allOf:
+        - $ref: '#/components/schemas/responseOK'
+        - example:
+            succeeded: false
+        - $ref: '#/components/schemas/responseDataObj'
+        - example:
+            data: null                 
+        - $ref: '#/components/schemas/responseErrorDetail'
+        - example:
+            errorDetail:
+                - timestamp: 2022-07-11T19:15:37.011+00:00
+                  code: -2
+                  message: Error de Timeout
+                  details: 
+                
+    dataCreateCustomerResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/listDataCreateCustomerResponse'         
+            
+    listDataCreateCustomerResponse:
+      properties:
+        idCliente:
+          type: number
+          description: Id Cliente autogenerado en BD. 
+     
+            
+    listDataCustomerResponse:
+      type: object
+      properties:
+        customerDetails:
+            $ref: '#/components/schemas/listCustomerDetailsResponse'
+
+    listDataCustomerDetailsResponse:
+      type: object
+      properties:
+        customerDetails:
+            $ref: '#/components/schemas/listCustomerResponse'        
+
+    listCustomerDetailsResponse:
+      properties:
+        promedioEdad:
+          type: number
+          description: Promedio de edad entre todos los clientes.
+        desviacionEstandar:
+          type: number
+          description: Desviacion Estandar entre todas las edades de los clientes.
+
+    listCustomerResponse:
+      properties:
+        nombre:
+          type: string
+          description: nombre del cliente
+        apellido:
+          type: string
+          description: apellidos del cliente
+        edad:
+          type: number
+          description: Edad del cliente
+        fechanacimiento:
+          type: string
+          format: date
+          pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+          description: Fecha de nacimiento.
+        fechamortandad:
+          type: string
+          format: date
+          pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+          description: Fecha de mortandad.
+
+  responses:
+    error400:
+      description: Se obtuvo error al validar firma de servicio.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_400'
+    error401:
+      description: Credenciales invalidas.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_401'
+    error404:
+      description: No se obtuvo el recurso solicitado.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_404'            
+    error500:
+      description: Error inesperado.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_500'
+    error503:
+      description: Al obtener un timeout en el flujo del servicio.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_503'            
+x-layer-type: SRV
+x-project-id: MDT
