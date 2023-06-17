@@ -26,7 +26,7 @@ KPI de Clientes:  https://dev-service-back.reto.pe/customer-management/customers
 Lista de Clientes https://dev-service-back.reto.pe/customer-management/customers/v1.0/listclientes ,
 
 
-3) En archivo Diagrama Microservicios.drawio se encuentra las dos propuestas de arquitectura utilizando el cloud azure y aws cloud. Se considera una capa de seguridad que cumpla función de WAF y a la vez una propuesta para poder consumir los microservicios desde un canal sería generar un token de acceso, aquí se ha incluido generarlo por los servicios que tienen de directorio activo tanto azure como aws. En el caso de Azure sería Azure Active Directory y en el caso de AWS sería AWS Directory Service.
+3) En archivo Diagrama Microservicios.drawio,el cual se ha exportado en imágenes se encuentra las dos propuestas de arquitectura utilizando el cloud azure y aws cloud. Se considera una capa de seguridad que cumpla función de WAF y a la vez una propuesta para poder consumir los microservicios desde un canal sería generar un token de acceso, aquí se ha incluido generarlo por los servicios que tienen de directorio activo tanto azure como aws. En el caso de Azure sería Azure Active Directory y en el caso de AWS sería AWS Directory Service.
 
 4) El excel anexo contiene como sería la distribución de tablas en la base de datos SQL Server de Azure y las respuestas que se obtendrían al consumir los endpoints de los microservicios.
  4.1) Pestaña : BD_Cliente (Create) se muestra como se insertarían los datos en la BD SQL Server en la tabla Cliente.
