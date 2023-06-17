@@ -15,6 +15,6 @@ Estructura de entregables:
    
 2) En el archivo MIC-Customers.yaml se encuentra el microservicio que contiene los 3 endpoints: create(crea cliente), kpiclientes,listclientes.
 En cada microservicio se ha incluido unos headers a modo de tener un estándar para consumir los microservicios:
-consumer-id: Aquí iría el canal o aplicativo consumidor.
+consumer-id: Aquí iría el canal o aplicativo consumidor,
 country-id: Id del país al que pertenece el servicio.Iría PE por default.
 destinationCountry-id: Id del país destino. Ejm: PE.
