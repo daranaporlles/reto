@@ -31,4 +31,6 @@ Lista de Clientes https://dev-service-back.reto.pe/customer-management/customers
 4) El excel anexo contiene como sería la distribución de tablas en la base de datos SQL Server de Azure y las respuestas que se obtendrían al consumir los endpoints de los microservicios.
  4.1) Pestaña : BD_Cliente (Create) se muestra como se insertarían los datos en la BD SQL Server en la tabla Cliente.
  4.2) Pestaña : GET kpiclientes es el resultado que se obtendría al consumir el microservicio de obtener los indicadores.
- 4.2) Pestaña : GET listclientes es el resultado que se obtendría al consumir el microservicio de listado de clientes.
+ 4.3) Pestaña : GET listclientes es el resultado que se obtendría al consumir el microservicio de listado de clientes.
+ 
+5) En documento Word se indica mayor detalle de la documentación.
